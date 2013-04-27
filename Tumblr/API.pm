@@ -532,6 +532,18 @@ sub user_unlike($$)
 #######
 ## Some internal funcions
 #######
+
+##
+# @desc		Get current tokens if exist
+# @return hash
+sub get_tokens
+{
+	my $self=shift;
+	return undef if( !defined $self->{token} || !defined $self->{token_secret} );
+	
+	return ( token => $self->{token}, token_secret => $self->{token_secret} );
+}
+
 sub set_blog(;$)
 {
 	my($self,$blog)=@_;
