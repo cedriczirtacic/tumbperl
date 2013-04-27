@@ -54,6 +54,14 @@ if($blog_info->{meta}->{msg} eq "OK"){
 }
 ```
 
+Dependencies
+------------
+
+List of dependencies needed by this module:
+* [JSON][2]
+* [Net::OAuth][3]
+
+
 Bugs
 ----
 
@@ -65,3 +73,5 @@ Author
 [Cedric Zirtacic (cicatriz)][1]
 
 [1]: mailto:cicatriz.r00t@gmail.com
+[2]: http://search.cpan.org/~makamaka/JSON-2.53/lib/JSON.pm
+[3]: http://search.cpan.org/dist/Net-OAuth/lib/Net/OAuth.pm
