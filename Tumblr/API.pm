@@ -273,7 +273,7 @@ sub get_tagged($;$$$)
 # @param int	$post_options	check the API for the list of options
 # @param string	$blog	blog
 # @result json 
-sub post($%;%$)
+sub post($$;$$)
 {
 	my($self,$type,$post_data,$post_options,$blog)=@_;
 	my(%data);
