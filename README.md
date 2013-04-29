@@ -5,9 +5,12 @@ tumbperl. (or Tumblr::API) is an unofficial Perl client for the Tumblr API.
 
 Installation
 -------------
+
+### Manual
+
 To install the module just copy the Tumblr/ folder to your common perl libraries directory. For example:
 
-```
+```console
 $ perl -V:archlib
 archlib='/usr/lib/perl5';
 ```
@@ -24,6 +27,14 @@ Test if you can successfully load the module:
 $ perl -e 'use Tumblr::API;'
 ```
 
+### Using Module::Build
+
+You might want to run the installation as a superuser.
+
+```console
+$ perl Build.PL
+$ ./Build install
+```
 
 Examples
 --------
