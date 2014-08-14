@@ -4,8 +4,6 @@ use strict;
 use warnings;
 use Net::OAuth;
 
-#use base qw( Tumblr::API );
-
 use Exporter qw(import);
 our @EXPORT;
 
@@ -80,3 +78,5 @@ sub request_access_token($$\%\%\$)
 }
 
 1;
+__END__
+

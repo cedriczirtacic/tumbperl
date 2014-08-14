@@ -633,8 +633,9 @@ sub _oauth_request($$;%)
 			croak "Error getting the tokens for authorization.";
 		}
 	
-		print sprintf("Please go to this website to get authorize: http://www.tumblr.com/oauth/authorize?oauth_token=%s\n",$tokens{token});
+		printf("Please go to this website to get authorize: http://www.tumblr.com/oauth/authorize?oauth_token=%s\n",$tokens{token});
 		print "Then paste the final URL and press enter.\n";
+		# TODO: Try to find a better way to do this
 		my $verify_url=<STDIN>;
 		chomp($verify_url);
 		
@@ -679,3 +680,5 @@ sub _oauth_request($$;%)
 }
 
 1;
+__END__
+
