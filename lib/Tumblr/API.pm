@@ -15,7 +15,7 @@ our(@ISA, $VERSION);
 
 @ISA		= qw( Exporter );
 $VERSION	= '0.1';
-our $api_url='http://api.tumblr.com/v2/';
+our $api_url='https://api.tumblr.com/v2/';
 
 $Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0A;
 
@@ -633,7 +633,7 @@ sub _oauth_request($$;%)
 			croak "Error getting the tokens for authorization.";
 		}
 	
-		printf("Please go to this website to get authorize: http://www.tumblr.com/oauth/authorize?oauth_token=%s\n",$tokens{token});
+		printf("Please go to this website to get authorize: https://www.tumblr.com/oauth/authorize?oauth_token=%s\n",$tokens{token});
 		print "Then paste the final URL and press enter.\n";
 		# TODO: Try to find a better way to do this
 		my $verify_url=<STDIN>;
@@ -677,6 +677,51 @@ sub _oauth_request($$;%)
 	);
 	$_oauth->sign;
 	return $_oauth;
+}
+
+#######
+# For Web App.
+#######
+
+##
+# @desc	Get authorization_url
+# @return string
+sub get_authorization_url {
+	my $self = shift;
+	
+	my %tokens = request_token($self->{consumer_key},
+		$self->{consumer_secret},
+		$self->{_useragent});
+
+	$self->{request_token}=$tokens{token};
+	$self->{request_token_secret}=$tokens{token_secret};
+		
+	return "https://www.tumblr.com/oauth/authorize?oauth_token=$tokens{token}";
+}
+
+##
+# @desc	Get Access token/secret
+# @param string	%access_token_params
+# @return	string array
+sub get_access_token(%) {
+	my ($self, %access_token_params) = @_;
+	my %tokens = ();
+	$tokens{token} = $self->{request_token};
+	$tokens{token_secret} = $self->{request_token_secret};
+	
+	my %access_tokens=request_access_token($self->{consumer_key},
+		$self->{consumer_secret},
+		%tokens,
+		%access_token_params,
+		$self->{_useragent});
+
+	$self->{token}=$access_tokens{token};
+	$self->{token_secret}=$access_tokens{token_secret};
+
+	return (
+		$access_tokens{token},
+		$access_tokens{token_secret}
+	);
 }
 
 1;
