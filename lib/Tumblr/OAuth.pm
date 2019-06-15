@@ -18,7 +18,7 @@ sub request_token($$\$)
 	my $_oauth_request=Net::OAuth->request('consumer')->new(
 		consumer_key => $consumer_key,
 		consumer_secret => $consumer_secret,
-		request_url => "http://www.tumblr.com/oauth/request_token",
+		request_url => "https://www.tumblr.com/oauth/request_token",
 		request_method => 'POST',
 		signature_method => 'HMAC-SHA1',
 		timestamp => time,
@@ -55,7 +55,7 @@ sub request_access_token($$\%\%\$)
 		consumer_secret => $consumer_secret,
 		token => $$oauth_tokens{token},
 		token_secret => $$oauth_tokens{token_secret},
-		request_url => "http://www.tumblr.com/oauth/access_token",
+		request_url => "https://www.tumblr.com/oauth/access_token",
 		request_method => 'POST',
 		signature_method => 'HMAC-SHA1',
 		timestamp => time,
